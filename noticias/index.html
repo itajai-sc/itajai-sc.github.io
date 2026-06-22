@@ -6,6 +6,28 @@
     <title>Radar de Negócios e Notícias Locais | Portal Itajaí</title>
     <meta name="description" content="Acompanhe o arquivo completo de notícias sobre economia, mercado local, desenvolvimento e empresas na região de Itajaí - SC.">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- BANCO DE DADOS COMPARTILHADO DE NOTÍCIAS -->
+    <script>
+        const LISTA_DE_NOTICIAS = [
+            {
+                tag: "Tendências",
+                corTag: "bg-blue-100 text-blue-700",
+                titulo: "Como o SEO Local está transformando o comércio de bairro em Santa Catarina",
+                descricao: "Entenda como o posicionamento estratégico nos mapas e buscas locais do Google está ditando o ritmo de vendas e atração de clientes para comércios tradicionais catarinenses.",
+                data: "Junho, 2026",
+                link: "/noticias/seo-local-sc.html"
+            },
+            {
+                tag: "Destaque Regional",
+                corTag: "bg-emerald-100 text-emerald-700",
+                titulo: "A Importância do Jornalismo Regional e da Mídia Local no Vale do Itajaí",
+                descricao: "Análise profunda sobre como os portais de comunicação impulsionam pequenos negócios e moldam a economia das cidades catarinenses.",
+                data: "Junho, 2026",
+                link: "/noticias/vale-do-itajai.html"
+            }
+        ];
+    </script>
 </head>
 <body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
 
@@ -34,22 +56,8 @@
             <p class="text-gray-500 mt-2 font-light">Artigos, análises e insights sobre o desenvolvimento comercial de Itajaí.</p>
         </div>
 
-        <!-- FEED DE NOTÍCIAS DO CLUSTER -->
-        <div class="bg-white rounded-xl border border-gray-200 divide-y divide-gray-100 shadow-xs">
-            
-            <!-- ARTIGO 1: VALE DO ITAJAÍ -->
-            <article class="p-6 hover:bg-gray-50/50 transition">
-                <span class="text-[10px] font-bold uppercase tracking-wider bg-blue-100 text-blue-700 px-2 py-0.5 rounded-sm">Destaque Regional</span>
-                <h2 class="text-xl font-bold text-gray-900 mt-3 leading-snug hover:text-blue-600">
-                    <a href="/noticias/vale-do-itajai.html">A Importância do Jornalismo Regional e da Mídia Local no Vale do Itajaí</a>
-                </h2>
-                <p class="text-gray-500 text-sm mt-2 font-light">Análise profunda sobre como os portais de comunicação impulsionam pequenos negócios e moldam a economia das cidades catarinenses.</p>
-                <p class="text-xs text-gray-400 mt-4">Publicado em Junho, 2026</p>
-            </article>
-
-            <!-- Adicione novos artigos aqui seguindo o mesmo padrão de estrutura -->
-
-        </div>
+        <!-- FEED AUTOMÁTICO -->
+        <div class="bg-white rounded-xl border border-gray-200 divide-y divide-gray-100 shadow-xs" id="feed-noticias"></div>
     </main>
 
     <!-- FOOTER -->
@@ -57,5 +65,19 @@
         <p>&copy; 2026 Portal Itajaí-SC. Otimização de SEO Local.</p>
     </footer>
 
+    <!-- ENGINE DE PREENCHIMENTO AUTOMÁTICO -->
+    <script>
+        const container = document.getElementById('feed-noticias');
+        container.innerHTML = LISTA_DE_NOTICIAS.map(noticia => `
+            <article class="p-6 hover:bg-gray-50/50 transition">
+                <span class="text-[10px] font-bold uppercase tracking-wider ${noticia.corTag} px-2 py-0.5 rounded-sm">${noticia.tag}</span>
+                <h2 class="text-xl font-bold text-gray-900 mt-3 leading-snug hover:text-blue-600 transition">
+                    <a href="${noticia.link}">${noticia.titulo}</a>
+                </h2>
+                <p class="text-gray-500 text-sm mt-2 font-light">${noticia.descricao}</p>
+                <p class="text-xs text-gray-400 mt-4">Publicado em ${noticia.data}</p>
+            </article>
+        `).join('');
+    </script>
 </body>
 </html>
